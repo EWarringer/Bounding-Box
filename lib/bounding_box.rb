@@ -1,35 +1,15 @@
 class BoundingBox
-  attr_reader :width, :height
+  attr_reader :width, :height, :left, :right, :top, :bottom
   def initialize(x, y, width, height)
-    @x = x
-    @y = y
+    @left = x
+    @right = x + width
+    @top = y + height
+    @bottom = y
     @width = width
     @height = height
   end
 
-  def left
-    @x
-  end
-
-  def right
-    @x + @width
-  end
-
-  def top
-    @y + @height
-  end
-
-  def bottom
-    @y
-  end
-
   def contains_point?(x, y)
-
-    if x.between?(@x, @x+@width) && y.between?(@y, @y+@height)
-      true
-    else
-      false
-    end
+    x.between?(@left, @right) && y.between?(@bottom, @top)
   end
-
 end
